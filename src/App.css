@@ -27,9 +27,10 @@
 }
 
 .layout{
-  display: flex;
+  display: grid;
   text-align: center;
-  column-gap: 20px;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr;
 }
 
 .App-link {
@@ -45,5 +46,17 @@
   }
 }
 .orange{
-  color: orange;
+  color: orangered;
+}
+.purple{
+  color: mediumpurple;
+}
+.rating-box{
+  margin-top: 30px;
+  border: 1px solid whitesmoke;
+}
+.rating-box > .fa-star{
+ cursor: pointer;
+  font-size: 25px;
+  padding: 5px;
 }
