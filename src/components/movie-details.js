@@ -9,17 +9,26 @@ const MovieDetails = (props) =>{
         setHighLighted(high)
     };
     const rateClicked = rate => evt =>{
+        fetch(`http://127.0.0.1:8000/api/movie/${mov.id}/rate_movie/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+                body: JSON.stringify({stars:rate+1})
+        })
+            .then(resp => getDetails(resp))
+            .catch(error => console.log(error))
+    };
+    const getDetails = () => {
         fetch(`http://127.0.0.1:8000/api/movie/${mov.id}/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Token e9f700dfc42250606962cf9c1fc26cbcf02eb710'
-      },
-            body: JSON.stringify({stars:rate+1})
-    })
-        .then(resp => resp.json())
-        .then(resp => console.log(resp))
-        .catch(error => console.log(error))
+            method:'GET',
+            headers:{
+                'Content-type':'application/json',
+            },
+        })
+            .then(r => r.json())
+            .then(r => props.updateDetails(r))
+            .then(error => console.log(error))
     };
     return(
         <React.Fragment>
